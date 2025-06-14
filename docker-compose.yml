@@ -1,0 +1,58 @@
+services:
+  # Backend Application (Laravel)
+  ma-backend:
+    build:
+      context: .
+      dockerfile: .docker/php/Dockerfile
+    container_name: ma-backend
+    restart: unless-stopped
+    tty: true
+    working_dir: /var/www
+    volumes:
+      - .:/var/www
+      - storage_data:/var/www/storage
+    networks:
+      - ma-network
+    depends_on:
+      - ma-db
+
+  # Backend Nginx (serving Laravel)
+  ma-nginx-backend:
+    image: nginx:stable-alpine
+    container_name: ma-nginx-backend
+    restart: unless-stopped
+    ports:
+      - "80:80"
+    volumes:
+      - .:/var/www
+      - ./.docker/nginx:/etc/nginx/conf.d
+    networks:
+      - ma-network
+    depends_on:
+      - ma-backend
+
+  # Database
+  ma-db:
+    image: postgres:latest
+    container_name: ma-db
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: ${DB_DATABASE}
+      POSTGRES_USER: ${DB_USERNAME}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+    ports:
+      - "5432:5432"
+    volumes:
+      - ma_db_data:/var/lib/postgresql/data
+    networks:
+      - ma-network
+
+networks:
+  ma-network:
+    driver: bridge
+
+volumes:
+  storage_data:
+    driver: local
+  ma_db_data:
+    driver: local
