@@ -23,11 +23,11 @@ class ParticipantFactory extends Factory
             'name' => $this->faker->company(),
             'website_link' => $this->faker->optional()->url(),
             'logo_path' => $this->faker->optional()->imageUrl(128, 128, 'logo', true),
-            'coordinates' => json_encode([
+            'coordinates' => [
                 ['lat' => $this->faker->latitude(), 'lng' => $this->faker->longitude()],
                 ['lat' => $this->faker->latitude(), 'lng' => $this->faker->longitude()],
                 ['lat' => $this->faker->latitude(), 'lng' => $this->faker->longitude()],
-            ]),
+            ],
         ];
     }
 }

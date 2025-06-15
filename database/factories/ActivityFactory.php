@@ -29,16 +29,16 @@ class ActivityFactory extends Factory
             'short_description' => $this->faker->sentence(rand(10, 20)),
             'registration_link' => $this->faker->optional()->url(),
             'location_description' => $this->faker->address(),
-            'coordinates' => json_encode([
+            'coordinates' => [
                 ['lat' => $this->faker->latitude(), 'lng' => $this->faker->longitude()],
                 ['lat' => $this->faker->latitude(), 'lng' => $this->faker->longitude()],
                 ['lat' => $this->faker->latitude(), 'lng' => $this->faker->longitude()],
                 ['lat' => $this->faker->latitude(), 'lng' => $this->faker->longitude()],
-            ]),
-            'schedule' => json_encode([
+            ],
+            'schedule' => [
                 ['date' => $this->faker->date(), 'time' => $this->faker->time()],
                 ['date' => $this->faker->date(), 'time' => $this->faker->time()],
-            ]),
+            ],
             'activity_type_id' => ActivityType::factory(),
             'creator_id' => User::factory(),
         ];
