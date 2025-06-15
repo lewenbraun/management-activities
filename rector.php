@@ -10,6 +10,7 @@ use Rector\Config\RectorConfig;
 use Rector\Php74\Rector\Closure\ClosureToArrowFunctionRector;
 use Rector\Set\ValueObject\SetList;
 use Rector\TypeDeclaration\Rector\ClassMethod\AddReturnTypeDeclarationRector;
+use Rector\TypeDeclaration\Rector\ClassMethod\ReturnTypeFromReturnNewRector;
 use Rector\ValueObject\PhpVersion;
 use RectorLaravel\Rector\Class_\AddExtendsAnnotationToModelFactoriesRector;
 use RectorLaravel\Rector\ClassMethod\AddGenericReturnTypeToRelationsRector;
@@ -53,6 +54,7 @@ return static function (RectorConfig $rectorConfig): void {
         ClosureToArrowFunctionRector::class,
         SimplifyIfReturnBoolRector::class,
         AddReturnTypeDeclarationRector::class,
+        ReturnTypeFromReturnNewRector::class,
         InlineConstructorDefaultToPropertyRector::class,
         AddGenericReturnTypeToRelationsRector::class,
         AddExtendsAnnotationToModelFactoriesRector::class,
