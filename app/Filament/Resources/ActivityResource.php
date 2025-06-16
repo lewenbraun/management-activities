@@ -74,6 +74,8 @@ class ActivityResource extends Resource
                 Select::make('activity_type_id')
                     ->relationship('activityType', 'name')
                     ->required(),
+                Select::make('participant_id')
+                    ->relationship('participant', 'name'),
                 Select::make('creator_id')
                     ->relationship('creator', 'name')
                     ->required(),

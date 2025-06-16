@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('activity_types', function (Blueprint $table): void {
             $table->id();
             $table->string('name');
-            $table->string('icon_path')->nullable();
+            $table->string('icon_name')->nullable();
             $table->integer('display_order')->default(0);
             $table->timestamps();
         });

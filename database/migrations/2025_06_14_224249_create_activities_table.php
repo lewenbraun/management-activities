@@ -23,8 +23,16 @@ return new class extends Migration
             $table->json('coordinates')->nullable();
             $table->json('schedule')->nullable();
 
-            $table->foreignId('activity_type_id')->constrained('activity_types')->onDelete('cascade');
-            $table->foreignId('creator_id')->constrained('users')->onDelete('cascade');
+            $table->foreignId('activity_type_id')
+                ->constrained('activity_types')
+                ->onDelete('set null');
+            $table->foreignId('creator_id')
+                ->constrained('users')
+                ->onDelete('set null');
+            $table->foreignId('participant_id')
+                ->nullable()
+                ->constrained('participants')
+                ->onDelete('set null');
 
             $table->timestamps();
         });

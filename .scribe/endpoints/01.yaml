@@ -1,0 +1,118 @@
+name: 'Participants Management'
+description: |-
+
+  Endpoints for managing event participants.
+endpoints:
+  -
+    httpMethods:
+      - GET
+    uri: api/v1/participants
+    metadata:
+      groupName: 'Participants Management'
+      groupDescription: |-
+
+        Endpoints for managing event participants.
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Get all participants'
+      description: 'Returns a list of all participants with their details.'
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        status: 200
+        content: |-
+          {
+            "data": [
+              {
+                "id": 1,
+                "name": "Tech Company Inc.",
+                "website_link": "https://tech.example.com",
+                "location_description": "New York",
+                "coordinates": [40.7128, -74.0060]
+              }
+            ]
+          }
+        headers: []
+        description: ''
+        custom: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - GET
+    uri: 'api/v1/participants/{participant_id}'
+    metadata:
+      groupName: 'Participants Management'
+      groupDescription: |-
+
+        Endpoints for managing event participants.
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Get specific participant'
+      description: 'Returns details of a single participant including their activities.'
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      participant_id:
+        name: participant_id
+        description: 'The ID of the participant.'
+        required: true
+        example: 1
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+    cleanUrlParameters:
+      participant_id: 1
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        status: 200
+        content: |-
+          {
+            "data": {
+              "id": 1,
+              "name": "Tech Company Inc.",
+              "website_link": "https://tech.example.com",
+              "location_description": "New York",
+              "coordinates": [40.7128, -74.0060],
+              "activities": [
+                {
+                  "id": 1,
+                  "name": "Laravel Workshop"
+                }
+              ]
+            }
+          }
+        headers: []
+        description: ''
+        custom: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []

@@ -34,10 +34,7 @@ class DatabaseSeeder extends Seeder
 
         Participant::factory(8)->create();
 
-        Activity::factory(20)->create()->each(function ($activity): void {
-            $participants = Participant::inRandomOrder()->limit(rand(1, 3))->get();
-            $activity->participants()->attach($participants);
-
+        Activity::factory(20)->create()->each(function (Activity $activity): void {
             $users = User::inRandomOrder()->limit(rand(0, 5))->get();
             $activity->favoritedByUsers()->attach($users);
         });

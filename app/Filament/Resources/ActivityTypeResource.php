@@ -34,7 +34,7 @@ class ActivityTypeResource extends Resource
                 TextInput::make('name')
                     ->required()
                     ->maxLength(255),
-                IconPicker::make('icon_path')
+                IconPicker::make('icon_name')
                     ->default('heroicon-o-academic-cap')
                     ->label('Icon'),
                 TextInput::make('display_order')
@@ -50,7 +50,7 @@ class ActivityTypeResource extends Resource
             ->columns([
                 TextColumn::make('name')
                     ->searchable(),
-                IconColumn::make('icon_path')
+                IconColumn::make('icon_name')
                     ->label('Icon'),
                 TextColumn::make('display_order')
                     ->numeric()

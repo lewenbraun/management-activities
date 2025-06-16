@@ -21,7 +21,7 @@ class ActivityTypeFactory extends Factory
     {
         return [
             'name' => $this->faker->unique()->word().' Type',
-            'icon_path' => $this->faker->randomElement([
+            'icon_name' => $this->faker->randomElement([
                 'heroicon-o-arrow-long-left',
                 'heroicon-o-arrow-path',
                 'heroicon-o-bookmark',
