@@ -25,7 +25,7 @@ class ActivityFactory extends Factory
             'name' => $this->faker->sentence(3),
             'description' => $this->faker->paragraph(rand(3, 8)),
             'source' => $this->faker->optional()->url(),
-            'main_image_path' => $this->faker->optional()->imageUrl(640, 480, 'activity', true),
+            'image_path' => $this->faker->optional()->imageUrl(640, 480, 'activity', true),
             'short_description' => $this->faker->sentence(rand(10, 20)),
             'registration_link' => $this->faker->optional()->url(),
             'location_description' => $this->faker->address(),

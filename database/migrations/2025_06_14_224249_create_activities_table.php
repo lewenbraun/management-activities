@@ -18,10 +18,8 @@ return new class extends Migration
             $table->string('name');
             $table->text('description');
             $table->string('source')->nullable();
-            $table->string('main_image_path')->nullable();
             $table->string('short_description', 200)->nullable();
             $table->string('registration_link')->nullable();
-            $table->text('location_description');
             $table->json('coordinates')->nullable();
             $table->json('schedule')->nullable();
 

@@ -10,9 +10,9 @@ use App\Filament\Resources\ActivityResource\Pages\ListActivities;
 use App\Filament\Resources\ActivityResource\Pages\ViewActivity;
 use App\Models\Activity;
 use Filament\Forms\Components\DatePicker;
-use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Repeater;
 use Filament\Forms\Components\Select;
+use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\TimePicker;
@@ -22,7 +22,7 @@ use Filament\Tables\Actions\BulkActionGroup;
 use Filament\Tables\Actions\DeleteBulkAction;
 use Filament\Tables\Actions\EditAction;
 use Filament\Tables\Actions\ViewAction;
-use Filament\Tables\Columns\ImageColumn;
+use Filament\Tables\Columns\SpatieMediaLibraryImageColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 
@@ -44,9 +44,9 @@ class ActivityResource extends Resource
                     ->columnSpanFull(),
                 TextInput::make('source')
                     ->maxLength(255),
-                FileUpload::make('main_image_path')
-                    ->directory('activities')
-                    ->image(),
+                SpatieMediaLibraryFileUpload::make('attachments')
+                    ->collection('activities')
+                    ->multiple(),
                 TextInput::make('short_description')
                     ->maxLength(200),
                 TextInput::make('registration_link')
@@ -95,8 +95,8 @@ class ActivityResource extends Resource
                     ->openUrlInNewTab()
                     ->limit(30)
                     ->searchable(),
-                ImageColumn::make('main_image_path')
-                    ->label('Image'),
+                SpatieMediaLibraryImageColumn::make('Attachments')
+                    ->collection('activities'),
                 TextColumn::make('activityType.name')
                     ->label('Type')
                     ->numeric()
