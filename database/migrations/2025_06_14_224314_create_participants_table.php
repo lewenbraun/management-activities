@@ -17,7 +17,6 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('website_link')->nullable();
-            $table->string('logo_path')->nullable();
             $table->json('coordinates')->nullable();
             $table->timestamps();
         });

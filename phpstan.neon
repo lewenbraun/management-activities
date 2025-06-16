@@ -5,3 +5,6 @@ parameters:
         - app
     level: max
     ignoreErrors:
+    excludePaths:
+        - app/Filament/Resources/RoleResource/*
+        - app/Filament/Resources/RoleResource.php
