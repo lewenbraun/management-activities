@@ -6,7 +6,7 @@ endpoints:
   -
     httpMethods:
       - GET
-    uri: api/v1/v1/activity-types
+    uri: api/v1/activity-types
     metadata:
       groupName: 'Activity Types Management'
       groupDescription: |-
@@ -54,7 +54,7 @@ endpoints:
   -
     httpMethods:
       - GET
-    uri: 'api/v1/v1/activity-types/{activityType_id}'
+    uri: 'api/v1/activity-types/{activityType_id}'
     metadata:
       groupName: 'Activity Types Management'
       groupDescription: |-

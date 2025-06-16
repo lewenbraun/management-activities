@@ -8,7 +8,7 @@ endpoints:
   -
     httpMethods:
       - GET
-    uri: api/v1/v1/participants
+    uri: api/v1/participants
     metadata:
       groupName: 'Participants Management'
       groupDescription: |-
@@ -57,7 +57,7 @@ endpoints:
   -
     httpMethods:
       - GET
-    uri: 'api/v1/v1/participants/{participant_id}'
+    uri: 'api/v1/participants/{participant_id}'
     metadata:
       groupName: 'Participants Management'
       groupDescription: |-

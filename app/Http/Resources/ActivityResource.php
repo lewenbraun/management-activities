@@ -4,13 +4,26 @@ declare(strict_types=1);
 
 namespace App\Http\Resources;
 
+use App\Models\Activity;
+use App\Models\ActivityType;
+use App\Models\Participant;
+use App\Models\User;
+use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
+/**
+ * @mixin Activity
+ *
+ * @property ActivityType $activityType
+ * @property User $creator
+ * @property Participant $participant
+ */
 class ActivityResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
      *
+     * @param  Request  $request
      * @return array<string, mixed>
      */
     public function toArray($request): array

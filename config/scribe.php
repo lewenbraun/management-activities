@@ -1,5 +1,11 @@
 <?php
 
+declare(strict_types=1);
+
+use Knuckles\Scribe\Extracting\Strategies\BodyParameters\GetFromFormRequest;
+use Knuckles\Scribe\Extracting\Strategies\BodyParameters\GetFromInlineValidator;
+use Knuckles\Scribe\Extracting\Strategies\BodyParameters\GetFromBodyParamAttribute;
+use Knuckles\Scribe\Extracting\Strategies\BodyParameters\GetFromBodyParamTag;
 use Knuckles\Scribe\Config\AuthIn;
 use Knuckles\Scribe\Config\Defaults;
 use Knuckles\Scribe\Extracting\Strategies;
@@ -227,7 +233,9 @@ return [
             ...Defaults::QUERY_PARAMETERS_STRATEGIES,
         ],
         'bodyParameters' => [
-            ...Defaults::BODY_PARAMETERS_STRATEGIES,
+            GetFromInlineValidator::class,
+            GetFromBodyParamAttribute::class,
+            GetFromBodyParamTag::class,
         ],
         'responses' => configureStrategy(
             Defaults::RESPONSES_STRATEGIES,

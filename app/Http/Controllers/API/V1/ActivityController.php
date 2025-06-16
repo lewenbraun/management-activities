@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers\API\V1;
 
+use App\Http\Requests\PaginationPagesRequest;
 use App\Http\Resources\ActivityResource;
 use App\Models\Activity;
 use Illuminate\Http\Resources\Json\JsonResource;
@@ -20,29 +21,33 @@ class ActivityController
      *
      * Returns a paginated list of all activities with essential details.
      *
-     * @queryParam per_page integer Items per page. Example: 10
+     * @queryParam per_page integer Items per page. Example: 15
+     * @queryParam page integer The page number. Example: 1
      *
      * @response 200 {
      *   "data": [
      *     {
      *       "id": 1,
      *       "name": "Laravel Workshop",
+     *       "description": "Learn Laravel basics and best practices.",
      *       "short_description": "Learn Laravel basics",
+     *       "source": "https://www.google.com/",
      *       "activity_type": "Workshop",
-     *       "participants": ["Tech Company Inc."]
+     *       "participant": "Tech Company Inc."
      *     }
      *   ],
      *   "links": { ... },
      *   "meta": { ... }
      * }
      */
-    public function index(): JsonResource
+    public function index(PaginationPagesRequest $request): JsonResource
     {
-        $perPage = request('per_page', 15);
+        $perPage = $request->integer('per_page', 15);
+        $page = $request->integer('page', 1);
 
         $activities = Activity::with(['activityType:id,name', 'participant:id,name'])
             ->latest()
-            ->paginate($perPage);
+            ->paginate($perPage, ['*'], 'page', $page);
 
         return ActivityResource::collection($activities);
     }
@@ -67,7 +72,7 @@ class ActivityController
      *     },
      *     "creator": {
      *       "id": 1,
-     *       "name": "Admin User"
+     *       "name": "John Doe"
      *     },
      *     "participant": {
      *         "id": 1,

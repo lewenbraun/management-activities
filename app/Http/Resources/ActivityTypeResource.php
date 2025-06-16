@@ -4,13 +4,17 @@ declare(strict_types=1);
 
 namespace App\Http\Resources;
 
+use App\Models\ActivityType;
+use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
+/**
+ * @mixin ActivityType
+ */
 class ActivityTypeResource extends JsonResource
 {
     /**
-     * Transform the resource into an array.
-     *
+     * @param  Request  $request
      * @return array<string, mixed>
      */
     public function toArray($request): array
@@ -20,11 +24,11 @@ class ActivityTypeResource extends JsonResource
             'name' => $this->name,
             'icon_name' => $this->icon_name,
             'display_order' => $this->display_order,
-            'activities' => $this->whenLoaded('activities', fn () => $this->activities->map(fn ($activity): array => [
+            'activities' => $this->whenLoaded('activities', fn (): array => $this->activities->map(fn ($activity): array => [
                 'id' => $activity->id,
                 'name' => $activity->name,
                 'short_description' => $activity->short_description,
-            ])),
+            ])->all()),
         ];
     }
 }
