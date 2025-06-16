@@ -61,7 +61,7 @@ class ActivityTypeController
      */
     public function show(ActivityType $activityType): JsonResource
     {
-        $activityType->load('activities:id,name,short_description');
+        $activityType->load('activities:id,name,short_description,activity_type_id');
 
         return new ActivityTypeResource($activityType);
     }
