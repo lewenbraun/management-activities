@@ -6,6 +6,7 @@ namespace Database\Factories;
 
 use App\Models\Activity;
 use App\Models\ActivityType;
+use App\Models\Participant; // Добавлено: импорт модели Participant
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -19,7 +20,7 @@ class ActivityFactory extends Factory
      *
      * @return array<string, mixed>
      */
-    public function definition()
+    public function definition(): array
     {
         return [
             'name' => $this->faker->sentence(3),
@@ -39,6 +40,7 @@ class ActivityFactory extends Factory
             ],
             'activity_type_id' => ActivityType::factory(),
             'creator_id' => User::factory(),
+            'participant_id' => Participant::factory(),
         ];
     }
 

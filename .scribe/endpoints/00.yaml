@@ -1,0 +1,117 @@
+name: 'Activity Types Management'
+description: |-
+
+  Endpoints for managing activity types.
+endpoints:
+  -
+    httpMethods:
+      - GET
+    uri: api/v1/v1/activity-types
+    metadata:
+      groupName: 'Activity Types Management'
+      groupDescription: |-
+
+        Endpoints for managing activity types.
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Get all activity types'
+      description: 'Returns a list of all activity types with their details.'
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        status: 200
+        content: |-
+          {
+            "data": [
+              {
+                "id": 1,
+                "name": "Workshop",
+                "icon_name": "icons/workshop.svg",
+                "display_order": 1
+              }
+            ]
+          }
+        headers: []
+        description: ''
+        custom: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - GET
+    uri: 'api/v1/v1/activity-types/{activityType_id}'
+    metadata:
+      groupName: 'Activity Types Management'
+      groupDescription: |-
+
+        Endpoints for managing activity types.
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Get specific activity type'
+      description: 'Returns details of a single activity type including related activities.'
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      activityType_id:
+        name: activityType_id
+        description: 'The ID of the activityType.'
+        required: true
+        example: 1
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+    cleanUrlParameters:
+      activityType_id: 1
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        status: 200
+        content: |-
+          {
+            "data": {
+              "id": 1,
+              "name": "Workshop",
+              "icon_name": "icons/workshop.svg",
+              "display_order": 1,
+              "activities": [
+                {
+                  "id": 1,
+                  "name": "Laravel Workshop",
+                  "short_description": "Learn Laravel basics"
+                }
+              ]
+            }
+          }
+        headers: []
+        description: ''
+        custom: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []

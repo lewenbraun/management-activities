@@ -16,7 +16,7 @@ class ActivityType extends Model
 
     protected $fillable = [
         'name',
-        'icon_path',
+        'icon_name',
         'display_order',
     ];
 

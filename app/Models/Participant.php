@@ -7,8 +7,7 @@ namespace App\Models;
 use Database\Factories\ParticipantFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
-use Illuminate\Database\Eloquent\Relations\Pivot;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 
@@ -31,10 +30,10 @@ class Participant extends Model implements HasMedia
     ];
 
     /**
-     * @return BelongsToMany<Activity, $this, Pivot>
+     * @return HasMany<Activity, $this>
      */
-    public function activities(): BelongsToMany
+    public function activities(): HasMany
     {
-        return $this->belongsToMany(Activity::class);
+        return $this->hasMany(Activity::class);
     }
 }

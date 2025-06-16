@@ -30,6 +30,7 @@ class Activity extends Model implements HasMedia
         'schedule',
         'activity_type_id',
         'creator_id',
+        'participant_id',
     ];
 
     protected $casts = [
@@ -54,11 +55,11 @@ class Activity extends Model implements HasMedia
     }
 
     /**
-     * @return BelongsToMany<Participant, $this, Pivot>
+     * @return BelongsTo<Participant, $this>
      */
-    public function participants(): BelongsToMany
+    public function participant(): BelongsTo
     {
-        return $this->belongsToMany(Participant::class);
+        return $this->belongsTo(Participant::class);
     }
 
     /**
