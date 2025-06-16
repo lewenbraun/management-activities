@@ -22,7 +22,6 @@ class Participant extends Model implements HasMedia
     protected $fillable = [
         'name',
         'website_link',
-        'logo_path',
         'location_description',
         'coordinates',
     ];

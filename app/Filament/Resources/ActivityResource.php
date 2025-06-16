@@ -45,15 +45,12 @@ class ActivityResource extends Resource
                 TextInput::make('source')
                     ->maxLength(255),
                 SpatieMediaLibraryFileUpload::make('attachments')
-                    ->collection('activities')
+                    ->collection('attachments')
                     ->multiple(),
                 TextInput::make('short_description')
                     ->maxLength(200),
                 TextInput::make('registration_link')
                     ->maxLength(255),
-                Textarea::make('location_description')
-                    ->required()
-                    ->columnSpanFull(),
                 Repeater::make('coordinates')
                     ->schema([
                         TextInput::make('lat')
@@ -96,7 +93,7 @@ class ActivityResource extends Resource
                     ->limit(30)
                     ->searchable(),
                 SpatieMediaLibraryImageColumn::make('Attachments')
-                    ->collection('activities'),
+                    ->collection('attachments'),
                 TextColumn::make('activityType.name')
                     ->label('Type')
                     ->numeric()

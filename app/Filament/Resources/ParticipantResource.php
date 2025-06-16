@@ -37,8 +37,8 @@ class ParticipantResource extends Resource
                     ->maxLength(255),
                 TextInput::make('website_link')
                     ->maxLength(255),
-                SpatieMediaLibraryFileUpload::make('Logo')
-                    ->collection('logo'),
+                SpatieMediaLibraryFileUpload::make('logos')
+                    ->collection('logos'),
                 Repeater::make('coordinates')
                     ->schema([
                         TextInput::make('lat')
@@ -65,8 +65,8 @@ class ParticipantResource extends Resource
                     ->openUrlInNewTab()
                     ->limit(50)
                     ->searchable(),
-                SpatieMediaLibraryImageColumn::make('Logo')
-                    ->collection('logo'),
+                SpatieMediaLibraryImageColumn::make('logos')
+                    ->collection('logos'),
                 TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()

@@ -25,10 +25,8 @@ class ActivityFactory extends Factory
             'name' => $this->faker->sentence(3),
             'description' => $this->faker->paragraph(rand(3, 8)),
             'source' => $this->faker->optional()->url(),
-            'image_path' => $this->faker->optional()->imageUrl(640, 480, 'activity', true),
-            'short_description' => $this->faker->sentence(rand(10, 20)),
+            'short_description' => $this->faker->sentence(rand(10, 15)),
             'registration_link' => $this->faker->optional()->url(),
-            'location_description' => $this->faker->address(),
             'coordinates' => [
                 ['lat' => $this->faker->latitude(), 'lng' => $this->faker->longitude()],
                 ['lat' => $this->faker->latitude(), 'lng' => $this->faker->longitude()],
@@ -42,5 +40,33 @@ class ActivityFactory extends Factory
             'activity_type_id' => ActivityType::factory(),
             'creator_id' => User::factory(),
         ];
+    }
+
+    public function configure(): self
+    {
+        $dir = __DIR__.'/fixtures/activity_attachments';
+
+        $files = array_merge(
+            glob("$dir/*.png") ?: [],
+            glob("$dir/*.jpg") ?: [],
+            glob("$dir/*.jpeg") ?: [],
+        );
+
+        return $this->afterCreating(function (Activity $activity) use ($files): void {
+            $count = rand(1, 3);
+
+            if ($files === []) {
+                return;
+            }
+
+            $chosenFiles = collect($files)->shuffle()->take(min($count, count($files)));
+
+            foreach ($chosenFiles as $file) {
+                $activity
+                    ->addMedia($file)
+                    ->preservingOriginal()
+                    ->toMediaCollection('attachments');
+            }
+        });
     }
 }

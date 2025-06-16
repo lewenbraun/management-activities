@@ -7,12 +7,15 @@ RUN apk --no-cache add \
     libzip-dev \
     postgresql-dev \
     git \
+    libjpeg-turbo-dev \
+    ffmpeg \
     && docker-php-ext-install \
     pdo \
     pdo_pgsql \
     opcache \
     intl \
-    zip
+    zip \
+    exif
 
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
