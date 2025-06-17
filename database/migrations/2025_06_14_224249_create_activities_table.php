@@ -24,9 +24,11 @@ return new class extends Migration
             $table->json('schedule')->nullable();
 
             $table->foreignId('activity_type_id')
+                ->nullable()
                 ->constrained('activity_types')
                 ->onDelete('set null');
             $table->foreignId('creator_id')
+                ->nullable()
                 ->constrained('users')
                 ->onDelete('set null');
             $table->foreignId('participant_id')

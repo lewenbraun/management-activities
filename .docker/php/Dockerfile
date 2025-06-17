@@ -5,13 +5,14 @@ RUN apk --no-cache add \
     g++ \
     icu-dev \
     libzip-dev \
-    postgresql-dev \
+    mysql-client \
+    mysql-dev \
     git \
     libjpeg-turbo-dev \
     ffmpeg \
     && docker-php-ext-install \
     pdo \
-    pdo_pgsql \
+    pdo_mysql \
     opcache \
     intl \
     zip \

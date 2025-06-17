@@ -34,17 +34,19 @@ services:
 
   # Database
   ma-db:
-    image: postgres:latest
+    image: mysql:8.0
     container_name: ma-db
     restart: unless-stopped
     environment:
-      POSTGRES_DB: ${DB_DATABASE}
-      POSTGRES_USER: ${DB_USERNAME}
-      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      MYSQL_DATABASE: ${DB_DATABASE}
+      MYSQL_USER: ${DB_USERNAME}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+      MYSQL_ALLOW_EMPTY_PASSWORD: 1
     ports:
-      - "5432:5432"
+      - "3306:3306"
     volumes:
-      - ma_db_data:/var/lib/postgresql/data
+      - ma_db_data:/var/lib/mysql
     networks:
       - ma-network
 

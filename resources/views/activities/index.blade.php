@@ -73,6 +73,10 @@
                         <div class="mt-4 flex items-center">
                             <span
                                 class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-blue-100 text-blue-800">
+                                @if ($activity->activityType->icon_name)
+                                    <x-dynamic-component :component="$activity->activityType->icon_name"
+                                        class="w-5 h-5 inline-block text-blue-600 mr-2" />
+                                @endif
                                 {{ $activity->activityType->name }}
                             </span>
                             <span class="ml-2 text-sm text-gray-500">
