@@ -1,5 +1,7 @@
 FROM php:8.4-fpm-alpine
 
+WORKDIR /var/www
+
 RUN apk --no-cache add \
     curl \
     g++ \
@@ -19,25 +21,14 @@ RUN apk --no-cache add \
     exif
 
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
-
-WORKDIR /var/www
-
-COPY composer.* ./
-RUN composer install --no-dev --no-scripts --no-autoloader
-
-COPY . .
-RUN composer dump-autoload --optimize
-
-RUN chown -R www-data:www-data /var/www/storage /var/www/bootstrap/cache \
-    && chmod -R ug+rwx /var/www/storage /var/www/bootstrap/cache
-
 RUN apk add --no-cache nodejs npm
 
-RUN npm install
-
-RUN rm -rf public/build/* public/manifest.json
-
-RUN npm run build
+COPY . .
 
 EXPOSE 9000
+
+COPY .docker/php/entrypoint.sh /usr/local/bin/entrypoint.sh
+RUN chmod +x /usr/local/bin/entrypoint.sh
+
+ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
 CMD ["php-fpm"]
