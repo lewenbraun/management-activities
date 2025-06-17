@@ -120,6 +120,16 @@ class ShieldSeeder extends Seeder
 
         $superAdmin->assignRole($filamentSuperAdminRole);
 
+        $readOnlyAdmin = User::factory()->create([
+            'name' => 'Admin',
+            'email' => 'admin@example.com',
+            'password' => bcrypt('password'),
+        ]);
+
+        $filamentReadOnlyRole = Role::where('name', 'read_only')->where('guard_name', 'filament')->first();
+
+        $readOnlyAdmin->assignRole($filamentReadOnlyRole);
+
         $regularUser = User::create([
             'name' => 'Regular User',
             'email' => 'user@example.com',
