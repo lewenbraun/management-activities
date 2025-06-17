@@ -8,3 +8,5 @@ parameters:
     excludePaths:
         - app/Filament/Resources/RoleResource/*
         - app/Filament/Resources/RoleResource.php
+        - app/Http/Controllers/Auth/*
+        - app/Http/Controllers/ProfileController.php

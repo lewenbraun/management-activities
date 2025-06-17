@@ -9,6 +9,7 @@ use BezhanSalleh\FilamentShield\Support\Utils;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
+use Spatie\Permission\Models\Role;
 use Spatie\Permission\PermissionRegistrar;
 
 class ShieldSeeder extends Seeder
@@ -18,7 +19,7 @@ class ShieldSeeder extends Seeder
         app()[PermissionRegistrar::class]->forgetCachedPermissions();
 
         $resources = ['user', 'participant', 'activity'];
-        $specialResource = 'activity::type'; // Специально для activity_type
+        $specialResource = 'activity::type';
 
         $actions = [
             'full_management' => ['view_any', 'view', 'create', 'update', 'delete', 'delete_any'],
@@ -35,7 +36,6 @@ class ShieldSeeder extends Seeder
                 array_map(fn ($action): string => "{$action}_{$resource}", $actions['full_management'])
             );
         }
-        // Добавляем права для activity::type
         $superAdminPermissions = array_merge(
             $superAdminPermissions,
             array_map(fn ($action): string => "{$action}_{$specialResource}", $actions['full_management'])
@@ -80,23 +80,28 @@ class ShieldSeeder extends Seeder
         $rolesWithPermissions = [
             [
                 'name' => 'super_admin',
-                'guard_name' => 'web',
+                'guard_name' => 'filament',
                 'permissions' => $superAdminPermissions,
             ],
             [
                 'name' => 'full_management',
-                'guard_name' => 'web',
+                'guard_name' => 'filament',
                 'permissions' => $fullManagementPermissions,
             ],
             [
                 'name' => 'limited_management',
-                'guard_name' => 'web',
+                'guard_name' => 'filament',
                 'permissions' => $limitedManagementPermissions,
             ],
             [
                 'name' => 'read_only',
-                'guard_name' => 'web',
+                'guard_name' => 'filament',
                 'permissions' => $readOnlyPermissions,
+            ],
+            [
+                'name' => 'user',
+                'guard_name' => 'web',
+                'permissions' => ['view_activities', 'add_to_favorites'],
             ],
         ];
 
@@ -110,7 +115,31 @@ class ShieldSeeder extends Seeder
             'email' => 'superadmin@example.com',
             'password' => Hash::make('password'),
         ]);
-        $superAdmin->assignRole('super_admin');
+
+        $filamentSuperAdminRole = Role::where('name', 'super_admin')->where('guard_name', 'filament')->first();
+
+        $superAdmin->assignRole($filamentSuperAdminRole);
+
+        $readOnlyAdmin = User::factory()->create([
+            'name' => 'Admin',
+            'email' => 'admin@example.com',
+            'password' => bcrypt('password'),
+        ]);
+
+        $filamentReadOnlyRole = Role::where('name', 'read_only')->where('guard_name', 'filament')->first();
+
+        $readOnlyAdmin->assignRole($filamentReadOnlyRole);
+
+        $regularUser = User::create([
+            'name' => 'Regular User',
+            'email' => 'user@example.com',
+            'password' => Hash::make('password'),
+        ]);
+
+        $userRole = Role::where('name', 'user')->where('guard_name', 'web')->first();
+        if ($userRole) {
+            $regularUser->assignRole($userRole);
+        }
     }
 
     protected static function makeRolesWithPermissions(string $rolesWithPermissions): void
