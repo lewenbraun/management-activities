@@ -23,6 +23,13 @@ class User extends Authenticatable
     use Notifiable;
 
     /**
+     * The guard names for the model.
+     *
+     * @var array<string>
+     */
+    protected $guard_name = ['web', 'filament'];
+
+    /**
      * The attributes that are mass assignable.
      *
      * @var list<string>
