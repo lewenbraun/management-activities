@@ -115,11 +115,13 @@
                             <div class="space-y-4">
                                 <div>
                                     <h3 class="text-sm font-medium text-gray-500">Activity Type</h3>
-                                    <p class="mt-1 text-gray-800">{{ $activity->activityType->name }}</p>
-                                    @if ($activity->activityType->icon_name)
-                                        <p class="text-sm text-gray-600">Icon: {{ $activity->activityType->icon_name }}
-                                        </p>
-                                    @endif
+                                    <p class="mt-1 text-gray-800 flex items-center">
+                                        {{ $activity->activityType->name }}
+                                        @if ($activity->activityType->icon_name)
+                                            <x-dynamic-component :component="$activity->activityType->icon_name ?: 'question-mark-circle'"
+                                                class="w-5 h-5 inline-block text-gray-500 ml-2" />
+                                        @endif
+                                    </p>
                                 </div>
 
                                 <div>

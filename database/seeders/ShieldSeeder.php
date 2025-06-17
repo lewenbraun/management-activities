@@ -98,11 +98,6 @@ class ShieldSeeder extends Seeder
                 'guard_name' => 'filament',
                 'permissions' => $readOnlyPermissions,
             ],
-            [
-                'name' => 'user',
-                'guard_name' => 'web',
-                'permissions' => ['view_activities', 'add_to_favorites'],
-            ],
         ];
 
         $rolesWithPermissionsJson = json_encode($rolesWithPermissions);
@@ -130,16 +125,11 @@ class ShieldSeeder extends Seeder
 
         $readOnlyAdmin->assignRole($filamentReadOnlyRole);
 
-        $regularUser = User::create([
+        User::create([
             'name' => 'Regular User',
             'email' => 'user@example.com',
             'password' => Hash::make('password'),
         ]);
-
-        $userRole = Role::where('name', 'user')->where('guard_name', 'web')->first();
-        if ($userRole) {
-            $regularUser->assignRole($userRole);
-        }
     }
 
     protected static function makeRolesWithPermissions(string $rolesWithPermissions): void
